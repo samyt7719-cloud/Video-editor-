@@ -1,0 +1,35 @@
+{
+  "title": "जादुई उड़ने वाला पेड़",
+  "hook": "क्या हो अगर एक पेड़ उड़ सके?",
+  "characters": [
+    {"id": "aarav", "name": "आरव", "type": "kid", "color": "#ff8a3d", "accent": "#ffd23f", "skin": "#e9b58a", "hair": "#2b1a10", "voice": "child"},
+    {"id": "ped", "name": "जादुई पेड़", "type": "tree", "color": "#3fbf6a", "accent": "#7dffd4", "voice": "deep"},
+    {"id": "chiku", "name": "चीकू", "type": "creature", "color": "#7fd1ff", "accent": "#ffe27a", "voice": "female"}
+  ],
+  "scenes": [
+    {"id": "s1", "title": "जंगल में आरव", "visual": "Boy walks toward camera in a bright forest, camera pushes in", "environment": "forest", "camera": "push", "sfx": "whoosh",
+     "cast": [{"id": "aarav", "x": 0, "action": "walk"}],
+     "lines": [
+       {"speaker": "narrator", "text": "क्या हो अगर एक पेड़ उड़ सके?", "emotion": "excited"},
+       {"speaker": "aarav", "text": "वाह, ये कैसी चमक है?", "emotion": "surprised"}]},
+    {"id": "s2", "title": "जादुई पेड़ प्रकट", "visual": "Glowing forest at dusk, magic tree pops in with fireflies", "environment": "glowing_forest", "camera": "orbit", "sfx": "magic",
+     "cast": [{"id": "aarav", "x": -1.3, "rotY": 0.3, "action": "idle"}, {"id": "ped", "x": 1.4, "rotY": -0.3, "enter": 18}],
+     "lines": [
+       {"speaker": "narrator", "text": "तभी एक जादुई पेड़ चमक उठा।", "emotion": "surprised"},
+       {"speaker": "ped", "text": "नमस्ते आरव! मेरे साथ उड़ोगे?", "emotion": "happy"}]},
+    {"id": "s3", "title": "हाँ कहना", "visual": "Boy jumps with joy next to the tree and the firefly friend", "environment": "glowing_forest", "camera": "push", "sfx": "sparkle",
+     "cast": [{"id": "aarav", "x": -1.2, "action": "jump"}, {"id": "ped", "x": 1.4, "action": "wave"}, {"id": "chiku", "x": 0.1, "z": 1.5}],
+     "lines": [
+       {"speaker": "aarav", "text": "सच में? चलो उड़ें!", "emotion": "excited"}]},
+    {"id": "s4", "title": "बादलों के ऊपर", "visual": "Tree flies through clouds with the boy riding on top", "environment": "sky", "camera": "crane", "sfx": "whoosh",
+     "cast": [{"id": "ped", "x": 0, "y": 1, "action": "fly"}, {"id": "aarav", "x": 0, "y": 3.7, "action": "ride"}, {"id": "chiku", "x": 2.2, "y": 2.5}],
+     "lines": [
+       {"speaker": "narrator", "text": "पेड़ आरव को बादलों के ऊपर ले गया।", "emotion": "happy"},
+       {"speaker": "aarav", "text": "ये तो कमाल है!", "emotion": "excited"}]},
+    {"id": "s5", "title": "सुनहरी शाम", "visual": "Sunset landing, friends together", "environment": "sunset", "camera": "orbit", "sfx": "sparkle",
+     "cast": [{"id": "aarav", "x": -1.3, "action": "wave"}, {"id": "ped", "x": 1.4, "rotY": -0.2}, {"id": "chiku", "x": 0, "z": 1.5}],
+     "lines": [
+       {"speaker": "ped", "text": "हम हमेशा दोस्त रहेंगे।", "emotion": "happy"},
+       {"speaker": "narrator", "text": "और आरव को मिला जंगल का सबसे प्यारा दोस्त।", "emotion": "happy"}]}
+  ]
+}

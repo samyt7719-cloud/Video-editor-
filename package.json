@@ -1,0 +1,31 @@
+{
+  "name": "cartoon-movie-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "story": "node scripts/generate-story.mjs",
+    "audio": "node scripts/make-audio.mjs",
+    "render": "remotion render src/index.ts Movie out/movie.mp4 --props=out/props.json --codec=h264 --crf=20 --pixel-format=yuv420p --gl=swangle --concurrency=2 --overwrite",
+    "qc": "node scripts/qc.mjs",
+    "studio": "npm run story --silent -- \"$TOPIC\" && npm run audio && npm run render && npm run qc",
+    "preview": "remotion studio src/index.ts --props=out/props.json",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-three/fiber": "8.17.10",
+    "@remotion/cli": "4.0.250",
+    "@remotion/google-fonts": "4.0.250",
+    "@remotion/three": "4.0.250",
+    "gsap": "3.12.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.250",
+    "three": "0.169.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "@types/three": "0.169.0",
+    "typescript": "5.6.3"
+  }
+}
