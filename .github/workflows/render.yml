@@ -1,0 +1,61 @@
+name: Render Cartoon Movie
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Topic likho. Test ke liye sirf: demo"
+        required: true
+        type: string
+      story_json:
+        description: "Optional: ready story JSON"
+        required: false
+        type: string
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 20}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: System deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libnss3 libdbus-1-3 libatk1.0-0 libgbm-dev libasound2t64 libxrandr2 libxkbcommon-dev libxfixes3 libxcomposite1 libxdamage1 libatk-bridge2.0-0 libpango-1.0-0 libcairo2 libcups2
+      - name: Hindi TTS
+        run: pip install piper-tts edge-tts
+      - uses: actions/cache@v4
+        with: {path: models, key: piper-hi-v1}
+      - run: npm install --no-audit --no-fund
+      - run: npx remotion browser ensure
+      - name: Demo story
+        env:
+          TOPIC: ${{ inputs.topic }}
+        run: if [ "$TOPIC" = "demo" ]; then cp story/example.json story/input.json; fi
+      - name: Story
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TOPIC: ${{ inputs.topic }}
+          STORY_JSON: ${{ inputs.story_json }}
+        run: node scripts/generate-story.mjs
+      - name: Audio
+        run: node scripts/make-audio.mjs
+      - name: Render MP4
+        run: npm run render
+      - name: Quality control
+        run: node scripts/qc.mjs
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cartoon-movie
+          path: |
+            out/movie.mp4
+            out/story.json
+            out/story.timed.json
+            out/storyboard.md
+            out/qc-report.json
+            out/frames/
+          if-no-files-found: warn
